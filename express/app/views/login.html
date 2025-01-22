@@ -76,40 +76,7 @@
     <p id="response"></p>
   </div>
 </div>
-<!-- <script>
-  const login = document.getElementById("login-form");
-  login.addEventListener('submit', function (event) {
-      event.preventDefault(); // Prevent default form submission
-
-      // Capture form data
-      const formData = new FormData(event.target);
-
-      try {
-          // Send the data to PHP file
-          const username = document.getElementById("username");
-          console.log(username.value) 
-          const password = document.getElementById("password");
-
-          const sqlite3 = require("sqlite3").verbose();
-          const db =new sqlite3.Database(
 
 
-
-
-
-
-
-          
-          // Get the PHP response
-
-          // Display the response in the page
-
-          document.getElementById('response').innerHTML = result;
-      } catch (error) {
-          // console.error('Error:', error);
-          document.getElementById('response').innerHTML = 'An error occurred. Please try again.';
-      }
-  });
-</script> -->
 
 {% endblock %}

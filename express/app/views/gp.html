@@ -1,0 +1,84 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Set Availability
+{% endblock %}
+
+{% block beforeContent %}
+{% endblock %}
+
+{% block content %}
+<div class="nhsuk-grid-row">
+  <div class="nhsuk-grid-column-two-thirds">
+    <h1 class="nhsuk-heading-xl">Set Availability</h1>
+    <p class="nhsuk-body">Specify the days and times you are available for appointments.</p>
+
+    <form id="availability-form" class="nhsuk-form-group">
+      <!-- Day Selection -->
+      <div class="nhsuk-form-group">
+        <label class="nhsuk-label" for="days">Select Days:</label>
+        <div class="nhsuk-checkboxes">
+          <div class="nhsuk-checkboxes__item">
+            <input class="nhsuk-checkboxes__input" type="checkbox" id="monday" name="days" value="Monday">
+            <label class="nhsuk-label nhsuk-checkboxes__label" for="monday">Monday</label>
+          </div>
+          <div class="nhsuk-checkboxes__item">
+            <input class="nhsuk-checkboxes__input" type="checkbox" id="tuesday" name="days" value="Tuesday">
+            <label class="nhsuk-label nhsuk-checkboxes__label" for="tuesday">Tuesday</label>
+          </div>
+          <!-- Repeat for other days -->
+        </div>
+      </div>
+
+      <!-- Time Slots -->
+      <div class="nhsuk-form-group">
+        <label class="nhsuk-label" for="time-slots">Enter Time Slots:</label>
+        <input 
+          class="nhsuk-input" 
+          id="time-slots" 
+          name="time-slots" 
+          type="text" 
+          placeholder="e.g., 9:00 AM - 12:00 PM, 2:00 PM - 5:00 PM" 
+          required>
+      </div>
+
+      <button type="submit" class="nhsuk-button">Set Availability</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  document.getElementById('availability-form').addEventListener('submit', async function (event) {
+      event.preventDefault(); // Prevent form submission
+
+      // Collect selected days and time slots
+      const selectedDays = Array.from(document.querySelectorAll('input[name="days"]:checked')).map(checkbox => checkbox.value);
+      const timeSlots = document.getElementById('time-slots').value;
+
+      if (selectedDays.length === 0 || !timeSlots.trim()) {
+          alert('Please select at least one day and specify time slots.');
+          return;
+      }
+
+      try {
+          // Send data to the server to save availability
+          const response = await fetch('/set-availability', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ days: selectedDays, timeSlots }),
+          });
+
+          const result = await response.json();
+
+          if (result.success) {
+              alert('Availability successfully saved!');
+          } else {
+              alert('Error: ' + result.message);
+          }
+      } catch (error) {
+          console.error('Error saving availability:', error);
+          alert('An unexpected error occurred.');
+      }
+  });
+</script>
+{% endblock %}

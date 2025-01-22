@@ -1,20 +1,35 @@
-// External dependencies
 const express = require('express');
+const axios = require('axios'); // For making HTTP requests
 
 const router = express.Router();
-router.post('/login-request', function(req, res) {
-    var username = req.body.username;
-    var password = req.body.password;
 
-    fetch('/login')
+router.post('/login-request', async (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
 
-    console.log(username);
+    try {
+        if (username && password) {
+            // Send data to the PHP API
+            const response = await axios.post('http://localhost:8000/insert.php', {
+                username,
+                password,
+            });
 
+            // Log PHP API response
+            console.log('PHP API Response:', response.data);
 
-
-        // res.redirect('/details')
-    
-})
-// Add your routes here - above the module.exports line
+            if (response.data.success) {
+                res.redirect('/details'); // Redirect on success
+            } else {
+                res.send('Error: ' + response.data.message); // Show error message from PHP
+            }
+        } else {
+            res.send('Username and password are required');
+        }
+    } catch (error) {
+        console.error('Error sending data to PHP API:', error.message);
+        res.status(500).send('An error occurred');
+    }
+});
 
 module.exports = router;
