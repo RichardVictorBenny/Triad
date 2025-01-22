@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+
+{% set mainClasses = "nhsuk-main-wrapper--s" %}
+
+{% block pageTitle %}
+  Question page
+{% endblock %}
+
+{% block beforeContent %}
+  {{ backLink({
+    "href": "#",
+    "text": "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <form action="/check-your-answers" method="post" class="form">
+
+        {{ textarea({
+          name: "details",
+          id: "detials",
+          value: data['details'],
+          label: {
+            text: "Tell us your symptoms of magical powers",
+            classes: "nhsuk-label-1",
+            isPageHeading: true
+          },
+          hint: {
+            text: "Do not include personal or financial information, for example, your National Insurance number or credit card details."
+          }
+        }) }}
+
+        {{ button({
+          "text": "Continue",
+          "id": "btn_submit"
+        }) }}
+
+        <p>(See the <a href="https://service-manual.nhs.uk/design-system/components">NHS digital service manual</a> for examples.)</p>
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
