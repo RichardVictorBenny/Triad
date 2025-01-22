@@ -13,7 +13,7 @@
     <h1 class="nhsuk-heading-xl">Log in to your NHS account</h1>
     <p class="nhsuk-body">Access your NHS services and manage your health securely.</p>
     
-    <form action="/login" method="post" class="nhsuk-form-group">
+    <form action="/login-request" method="post" class="nhsuk-form-group" id="login-form">
       <!-- Username Field -->
       <div class="nhsuk-form-group">
         <label class="nhsuk-label" for="username">Username or NHS Number</label>
@@ -60,7 +60,7 @@
 
       <!-- Login Button -->
       <br><br>
-      <button class="nhsuk-button" type="submit">Log in</button>
+      <input type= "submit" class="nhsuk-button" type="submit"></input>
 
       <!-- Forgot Password Link -->
       <p class="nhsuk-body">
@@ -73,6 +73,43 @@
     <p class="nhsuk-body">
       Need help logging in? Visit our <a href="/help" class="nhsuk-link">help page</a> or contact support at <a href="mailto:support@nhs.uk" class="nhsuk-link">support@nhs.uk</a>.
     </p>
+    <p id="response"></p>
   </div>
 </div>
+<!-- <script>
+  const login = document.getElementById("login-form");
+  login.addEventListener('submit', function (event) {
+      event.preventDefault(); // Prevent default form submission
+
+      // Capture form data
+      const formData = new FormData(event.target);
+
+      try {
+          // Send the data to PHP file
+          const username = document.getElementById("username");
+          console.log(username.value) 
+          const password = document.getElementById("password");
+
+          const sqlite3 = require("sqlite3").verbose();
+          const db =new sqlite3.Database(
+
+
+
+
+
+
+
+          
+          // Get the PHP response
+
+          // Display the response in the page
+
+          document.getElementById('response').innerHTML = result;
+      } catch (error) {
+          // console.error('Error:', error);
+          document.getElementById('response').innerHTML = 'An error occurred. Please try again.';
+      }
+  });
+</script> -->
+
 {% endblock %}

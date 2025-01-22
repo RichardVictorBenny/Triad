@@ -2,14 +2,18 @@
 const express = require('express');
 
 const router = express.Router();
-router.post('/magical-powers-answer', function(req, res) {
-    var magicPowers = req.session.data['magical-powers']
+router.post('/login-request', function(req, res) {
+    var username = req.body.username;
+    var password = req.body.password;
 
-    if(magicPowers == "yes"){
-        res.redirect('/details')
-    } else{
-        res.redirect('/ineligible')
-    }
+    fetch('/login')
+
+    console.log(username);
+
+
+
+        // res.redirect('/details')
+    
 })
 // Add your routes here - above the module.exports line
 

@@ -32,12 +32,15 @@
     "gulp-nodemon": "^2.5.0",
     "gulp-rename": "^2.0.0",
     "gulp-sass": "^5.1.0",
+    "install": "^0.13.0",
     "lodash": "^4.17.21",
     "nhsuk-frontend": "^9.1.0",
     "nhsuk-prototype-kit": "file:",
+    "npm": "^11.0.0",
     "nunjucks": "^3.2.4",
     "path": "^0.12.7",
-    "sass": "^1.79.5"
+    "sass": "^1.79.5",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "eslint": "^8.56.0",

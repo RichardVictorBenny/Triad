@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
-$username = "my_app_user";
-$password = "password";
+$username = "test";
+$password = "triad";
 $dbname = "my_app_db";
 
 // Create connection
