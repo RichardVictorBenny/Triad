@@ -1,0 +1,94 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Sign up
+{% endblock %}
+
+{% block beforeContent %}
+{% endblock %}
+
+{% block content %}
+<div class="nhsuk-grid-row">
+  <div class="nhsuk-grid-column-two-thirds">
+    <h1 class="nhsuk-heading-xl">Sign up for an NHS account</h1>
+    <p class="nhsuk-body">Create an account to access your NHS services and manage your health securely.</p>
+
+    <form action="/signup" method="post" class="nhsuk-form-group">
+      <!-- Full Name Field -->
+      <div class="nhsuk-form-group">
+        <label class="nhsuk-label" for="fullname">Full Name</label>
+        <input 
+          class="nhsuk-input" 
+          id="fullname" 
+          name="fullname" 
+          type="text" 
+          placeholder="Enter your full name" 
+          required>
+      </div>
+
+      <!-- NHS Number Field -->
+      <div class="nhsuk-form-group">
+        <label class="nhsuk-label" for="nhs-number">NHS Number</label>
+        <span class="nhsuk-hint">Your NHS Number can be found on letters from your GP or NHS services.</span>
+        <input 
+          class="nhsuk-input" 
+          id="nhs-number" 
+          name="nhs-number" 
+          type="text" 
+          placeholder="Enter your NHS Number (optional)" 
+          aria-describedby="nhs-number-hint">
+      </div>
+
+      <!-- Email Field -->
+      <div class="nhsuk-form-group">
+        <label class="nhsuk-label" for="email">Email Address</label>
+        <input 
+          class="nhsuk-input" 
+          id="email" 
+          name="email" 
+          type="email" 
+          placeholder="Enter your email address" 
+          required>
+      </div>
+
+      <!-- Password Field -->
+      <div class="nhsuk-form-group">
+        <label class="nhsuk-label" for="password">Password</label>
+        <span class="nhsuk-hint">Your password must be at least 8 characters long and contain a mix of letters and numbers.</span>
+        <input 
+          class="nhsuk-input" 
+          id="password" 
+          name="password" 
+          type="password" 
+          placeholder="Enter a secure password" 
+          required>
+      </div>
+
+      <!-- Confirm Password Field -->
+      <div class="nhsuk-form-group">
+        <label class="nhsuk-label" for="confirm-password">Confirm Password</label>
+        <input 
+          class="nhsuk-input" 
+          id="confirm-password" 
+          name="confirm-password" 
+          type="password" 
+          placeholder="Re-enter your password" 
+          required>
+      </div>
+
+      <!-- Sign Up Button -->
+      <button class="nhsuk-button" type="submit">Sign up</button>
+
+      <!-- Log In Link -->
+      <p class="nhsuk-body">
+        Already have an account? <a href="/login" class="nhsuk-link">Log in here</a>.
+      </p>
+    </form>
+
+    <!-- Support Information -->
+    <p class="nhsuk-body">
+      Need help signing up? Visit our <a href="/help" class="nhsuk-link">help page</a> or contact support at <a href="mailto:support@nhs.uk" class="nhsuk-link">support@nhs.uk</a>.
+    </p>
+  </div>
+</div>
+{% endblock %}
