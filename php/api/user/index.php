@@ -1,8 +1,9 @@
 <?php
 header('Content-Type: application/json');
 
-$request = $_SERVER['REQUEST_URI'];
+$request = explode("/", $_SERVER['REQUEST_URI']);
 $method = $_SERVER['REQUEST_METHOD'];
+
 
 
 if ($request === '/user' && $method === 'GET') {
@@ -11,6 +12,6 @@ if ($request === '/user' && $method === 'GET') {
     echo json_encode(["message" => "POST request to /user"]);
 } else {
     http_response_code(404);
-    echo json_encode(["message" => "Endpoint not found"]);
+    echo json_encode(["message" => "Endpoint not found", "request"=>$request,"method"=>$method ]);
 }
 ?>
