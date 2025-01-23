@@ -1,0 +1,130 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+Select a Date and Slot
+{% endblock %}
+
+{% block beforeContent %}
+{{ breadcrumb({
+href: "/login",
+text: "back"
+}) }}
+{% endblock %}
+
+{% block content %}
+<div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column">
+        <h1>Select a Date and Slot</h1>
+
+        <!-- Horizontal Date Scroller -->
+        <div class="date-scroller nhsuk-card">
+            <h2 class="nhsuk-heading-m p-2">Choose a Date</h2>
+            <div class="date-scroller-wrapper">
+                <ul class="nhsuk-list nhsuk-list--inline" id="dateScroller">
+                    {% for date in dates %}
+                    <li>
+                        <button class="nhsuk-button nhsuk-button--secondary date-item" data-date="{{ date }}">
+                            {{ date }}
+                        </button>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Available Slots -->
+        <div class="slots-container nhsuk-card p-2">
+            <h2 class="nhsuk-heading-m">Available Slots</h2>
+            <div class="time-slots-containter" id="slotsContainer">
+
+            </div>
+            <!-- Slots will be populated dynamically -->
+        </div>
+    </div>
+</div>
+
+<script>
+    // JavaScript to handle dynamic updates
+
+    const dates = [];
+    let currentDate = new Date();
+
+    while (dates.length < 7) { // Generate 7 weekday dates
+        const day = currentDate.getDay(); // Get the day of the week (0 = Sunday, 6 = Saturday)
+        if (day !== 0 && day !== 6) { // Only include Monday (1) to Friday (5)
+            dates.push(currentDate.toLocaleDateString('en-GB', {
+                weekday: 'long',
+                day: 'numeric',
+                month: 'long'
+            }));
+        }
+        currentDate.setDate(currentDate.getDate() + 1); // Move to the next day
+    }
+
+    // Slots configuration
+    const startTime = 9;
+    const endTime = 17;
+    const slotInterval = 15;
+
+    // Populate the date scroller
+    const dateScroller = document.getElementById('dateScroller');
+    dates.forEach((date, index) => {
+        const dateItem = document.createElement('div');
+        dateItem.textContent = date;
+        dateItem.classList.add('date-item');
+        dateItem.dataset.date = date;
+        if (index === 0) dateItem.classList.add('selected');
+        dateScroller.appendChild(dateItem);
+    });
+
+    // Simulated data for demonstration
+    const slots = [
+        "09:00 AM", "09:15 AM", "09:30 AM", "09:45 AM",
+        "10:00 AM", "10:15 AM", "10:30 AM", "10:45 AM",
+        "11:00 AM", "11:15 AM", "11:30 AM", "11:45 AM",
+        "12:00 PM", "12:15 PM", "12:30 PM", "12:45 PM",
+        "01:00 PM", "01:15 PM", "01:30 PM", "01:45 PM",
+        "02:00 PM", "02:15 PM", "02:30 PM", "02:45 PM",
+        "03:00 PM", "03:15 PM", "03:30 PM", "03:45 PM",
+        "04:00 PM", "04:15 PM", "04:30 PM", "04:45 PM"
+    ];
+
+    const slotsContainer = document.getElementById("slotsContainer");
+
+    // Add event listeners for date selection
+    document.querySelectorAll(".date-item").forEach((button) => {
+        button.addEventListener("click", () => {
+            // Highlight selected date
+            document.querySelectorAll(".date-item").forEach((btn) => {
+                btn.classList.remove("nhsuk-button--active");
+            });
+            button.classList.add("nhsuk-button--active");
+
+            slotsContainer.innerHTML = ""; 
+
+            slots.forEach((slot) => {
+                const isAvailable = Math.random() >= 0.5;
+                const slotItem = document.createElement("div");
+                slotItem.classList.add("slot-item");
+
+                const button = document.createElement("button");
+                button.classList.add("nhsuk-button");
+                button.disabled = !isAvailable;
+                button.textContent = slot;
+
+                button.addEventListener("click", () => {
+                    const formattedTime = formatTime(slot); 
+                    window.location.href = `/slot/${formattedTime}`; 
+                });
+
+                slotItem.appendChild(button);
+                slotsContainer.appendChild(slotItem);
+            });
+
+            function formatTime(slot) {
+                return slot.replace(/\s+/g, '').toLowerCase();
+            }
+        });
+    });
+</script>
+{% endblock %}

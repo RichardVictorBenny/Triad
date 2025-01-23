@@ -1,8 +1,7 @@
 # Use the official PHP image with Apache as the base image
 FROM php:apache
 
-# Install the MySQLi extension for PHP
-RUN docker-php-ext-install mysqli
+RUN docker-php-ext-install pdo_mysql
 
 # Set the working directory inside the container
 WORKDIR /var/www/html

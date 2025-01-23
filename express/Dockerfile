@@ -10,6 +10,7 @@ COPY . .
 # Install dependencies (this includes gulp and any other dependencies in package.json)
 RUN npm install
 
+
 # List the files in the directory to ensure gulpfile.js is present
 RUN ls -la /usr/src/app
 
@@ -17,4 +18,4 @@ RUN ls -la /usr/src/app
 EXPOSE 3000
 
 # Run the application in watch mode
-CMD ["npm", "run", "watch"]
+CMD ["npm", "run", "start"]
