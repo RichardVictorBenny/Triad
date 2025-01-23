@@ -18,4 +18,4 @@ RUN ls -la /usr/src/app
 EXPOSE 3000
 
 # Run the application in watch mode
-CMD ["npm", "run", "watch"]
+CMD ["npm", "run", "start"]

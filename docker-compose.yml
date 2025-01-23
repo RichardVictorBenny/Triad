@@ -1,17 +1,17 @@
 version: '3.8'
 
 services:
-  express:
-    build:
-      context: ./express
-    container_name: express_app
-    working_dir: /usr/src/app
-    volumes:
-      - ./express:/usr/src/app
-    ports:
-      - "3000:3000"
-    depends_on:
-      - mysql
+  # express:
+  #   build:
+  #     context: ./express
+  #   container_name: express_app
+  #   working_dir: /usr/src/app
+  #   volumes:
+  #     - ./express:/usr/src/app
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     - mysql
 
   php:
     build:
