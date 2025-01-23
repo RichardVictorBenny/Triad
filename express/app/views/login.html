@@ -1,0 +1,122 @@
+{% extends 'layout.html' %}
+
+{% block pageTitle %}
+  Log in
+{% endblock %}
+
+{% block beforeContent %}
+{% endblock %}
+
+{% block content %}
+<div class="nhsuk-grid-row">
+  <div class="nhsuk-grid-column-two-thirds">
+    <h1 class="nhsuk-heading-xl">Log in to your NHS account</h1>
+    <p class="nhsuk-body">Access your NHS services and manage your health securely.</p>
+    
+    <form action="" method="post" class="nhsuk-form-group" id="login-form">
+      <!-- Username Field -->
+      <div class="nhsuk-form-group">
+        <label class="nhsuk-label" for="username">Username or NHS Number</label>
+        <span class="nhsuk-hint">Your NHS Number can be found on letters from your GP or NHS services.</span>
+        <input 
+          class="nhsuk-input" 
+          id="username" 
+          name="username" 
+          type="text" 
+          placeholder="Enter your username or NHS Number" 
+          required 
+          aria-describedby="username-hint">
+      </div>
+
+      <!-- Password Field -->
+      <div class="nhsuk-form-group">
+        <label class="nhsuk-label" for="password">Password</label>
+        <span class="nhsuk-hint">Ensure your password is at least 8 characters long.</span>
+        <input 
+          class="nhsuk-input" 
+          id="password" 
+          name="password" 
+          type="password" 
+          placeholder="Enter your password" 
+          required 
+          aria-describedby="password-hint">
+      </div>
+
+      <!-- Remember Me Checkbox -->
+      <div class="nhsuk-form-group">
+        <div class="nhsuk-checkboxes">
+          <div class="nhsuk-checkboxes__item">
+            <input 
+              class="nhsuk-checkboxes__input" 
+              id="remember-me" 
+              name="remember-me" 
+              type="checkbox">
+            <label class="nhsuk-label nhsuk-checkboxes__label" for="remember-me">
+              Remember me on this device
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Login Button -->
+      <br><br>
+      <input type= "submit" class="nhsuk-button" type="submit"></input>
+
+      <!-- Forgot Password Link -->
+      <p class="nhsuk-body">
+        <a href="/forgot-password" class="nhsuk-link">Forgot your password?</a>
+      </p>
+      <p class ="nhsuk-body"> Dont have an account <a href="/signup">sign up</a></p>
+    </form>
+
+    <!-- Support Information -->
+    <p class="nhsuk-body">
+      Need help logging in? Visit our <a href="/help" class="nhsuk-link">help page</a> or contact support at <a href="mailto:support@nhs.uk" class="nhsuk-link">support@nhs.uk</a>.
+    </p>
+    <p id="response"></p>
+  </div>
+</div>
+<script>
+  const login = document.getElementById("login-form");
+  login.addEventListener('submit', async function (event) {
+
+     event.preventDefault();
+      // Capture form data
+      const formData = new FormData(event.target);
+
+      try {
+          // Send the data to PHP file
+          let username =document.getElementById("username").value;
+          let password = document.getElementById("password").value;
+
+
+          if(username  && password)
+
+          {
+            window.location.href = "/home";
+          }
+          else
+          {
+            var result = "Please enter a username and password";
+          }
+
+
+
+
+
+         
+          // Get the PHP response
+
+          // Display the response in the page
+
+          document.getElementById('response').innerHTML = result;
+      } catch (error) {
+          // console.error('Error:', error);
+          document.getElementById('response').innerHTML = 'An error occurred. Please try again.';
+      }
+  });
+</script>
+
+
+
+{% endblock %}
