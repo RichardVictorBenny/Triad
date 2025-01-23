@@ -67,7 +67,7 @@
                 <strong>Time:</strong> {{ appointment.time }}<br>
                 <strong>Patient:</strong> <span class="patient-name" id="patient-{{ loop.index }}">********</span>
                 <button class="nhsuk-button nhsuk-button--secondary reveal-button" data-patient-id="{{ loop.index }}">Reveal </button>
-                <button class="nhsuk-button nhsuk-button--secondary hide-button" data-patient-id="{{ loop.index }}" style="display:none;">Hide </button>
+                <button class="nhsuk-button nhsuk-button--secondary hide-button" data-patient-id="{{ loop.index }}"  style="display:none;">Hide </button>
               </li>
             {% endfor %}
           </ul>
