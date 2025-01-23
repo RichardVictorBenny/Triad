@@ -1,0 +1,187 @@
+{% extends 'layout.html' %}
+
+{% set mainClasses = "nhsuk-main-wrapper--s" %}
+
+{% block pageTitle %}
+  GP Agenda
+{% endblock %}
+
+{% block beforeContent %}
+  {{ backLink({
+    "href": "/login",
+    "text": "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-full">
+      <h1 class="nhsuk-heading-xl">Doctor Agenda</h1>
+
+      <!-- Navigation for different days -->
+      <nav class="nhsuk-pagination" role="navigation" aria-label="Pagination">
+        <ul class="nhsuk-pagination__list" style="list-style: none; padding: 0;">
+          <li class="nhsuk-pagination-item--previous">
+            <a class="nhsuk-pagination__link" href="#" id="prev-date">
+              <span class="nhsuk-pagination__title">Previous</span>
+              <span class="nhsuk-u-visually-hidden">:</span>
+              <span class="nhsuk-pagination__page" id="prev-date-text"></span>
+            </a>
+          </li>
+          <li class="nhsuk-pagination-item--next">
+            <a class="nhsuk-pagination__link" href="#" id="next-date">
+              <span class="nhsuk-pagination__title">Next</span>
+              <span class="nhsuk-u-visually-hidden">:</span>
+              <span class="nhsuk-pagination__page" id="next-date-text"></span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Agenda for the selected day -->
+      <h2 class="nhsuk-heading-l" id="appointments-title">Appointments for Today</h2>
+
+      {% set appointmentsByDate = {
+        "2025-01-24": [
+          {"time": "9:00 AM", "name": "Alice Green"},
+          {"time": "10:30 AM", "name": "Bob White"}
+        ],
+        "2025-01-25": [
+          {"time": "10:00 AM", "name": "John Doe"},
+          {"time": "11:30 AM", "name": "Jane Smith"},
+          {"time": "2:00 PM", "name": "Emily Brown"}
+        ],
+        "2025-01-26": [
+          {"time": "1:00 PM", "name": "Chris Black"},
+          {"time": "3:30 PM", "name": "Diana Blue"}
+        ]
+      } %}
+
+      {% set appointments = appointmentsByDate["2025-01-25"] %}
+
+      <div id="appointments-container">
+        {% if appointments and appointments.length > 0 %}
+          <ul class="nhsuk-list">
+            {% for appointment in appointments %}
+              <li>
+                <strong>Time:</strong> {{ appointment.time }}<br>
+                <strong>Patient:</strong> <span class="patient-name" id="patient-{{ loop.index }}">********</span>
+                <button class="nhsuk-button nhsuk-button--secondary reveal-button" data-patient-id="{{ loop.index }}">Reveal </button>
+                <button class="nhsuk-button nhsuk-button--secondary hide-button" data-patient-id="{{ loop.index }}" style="display:none;">Hide </button>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>No appointments scheduled for this day.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const params = new URLSearchParams(window.location.search);
+      const currentDate = params.get('date') || new Date().toISOString().split('T')[0];
+
+      const updatePagination = () => {
+        const current = new Date(currentDate);
+        const prevDate = new Date(current);
+        const nextDate = new Date(current);
+
+        prevDate.setDate(current.getDate() - 1);
+        nextDate.setDate(current.getDate() + 1);
+
+        document.getElementById('prev-date').href = `?date=${prevDate.toISOString().split('T')[0]}`;
+        document.getElementById('next-date').href = `?date=${nextDate.toISOString().split('T')[0]}`;
+        document.getElementById('prev-date-text').textContent = prevDate.toISOString().split('T')[0];
+        document.getElementById('next-date-text').textContent = nextDate.toISOString().split('T')[0];
+
+        document.getElementById('appointments-title').textContent = `Appointments for ${current.toISOString().split('T')[0]}`;
+      };
+
+      const attachEventListeners = () => {
+        const revealButtons = document.querySelectorAll('.reveal-button');
+        const hideButtons = document.querySelectorAll('.hide-button');
+
+        revealButtons.forEach(button => {
+          button.addEventListener('click', function() {
+            const patientId = this.getAttribute('data-patient-id');
+            const patientNameElement = document.getElementById('patient-' + patientId);
+
+            const patientNames = {
+              1: 'Alice Green',
+              2: 'Bob White',
+              3: 'John Doe',
+              4: 'Jane Smith',
+              5: 'Emily Brown',
+              6: 'Chris Black',
+              7: 'Diana Blue'
+            };
+            patientNameElement.textContent = patientNames[patientId];
+
+            this.style.display = 'none';
+            const hideButton = document.querySelector(`.hide-button[data-patient-id="${patientId}"]`);
+            if (hideButton) hideButton.style.display = 'inline-block';
+          });
+        });
+
+        hideButtons.forEach(button => {
+          button.addEventListener('click', function() {
+            const patientId = this.getAttribute('data-patient-id');
+            const patientNameElement = document.getElementById('patient-' + patientId);
+
+            patientNameElement.textContent = '********';
+
+            this.style.display = 'none';
+            const revealButton = document.querySelector(`.reveal-button[data-patient-id="${patientId}"]`);
+            if (revealButton) revealButton.style.display = 'inline-block';
+          });
+        });
+      };
+
+      const loadAppointments = () => {
+        const appointmentsByDate = {
+          "2025-01-22": [
+            {"time": "9:00 AM", "name": "Alice Green"},
+            {"time": "10:30 AM", "name": "Bob White"}
+          ],
+          "2025-01-23": [
+            {"time": "10:00 AM", "name": "John Doe"},
+            {"time": "11:30 AM", "name": "Jane Smith"},
+            {"time": "2:00 PM", "name": "Emily Brown"}
+          ],
+          "2025-01-25": [
+            {"time": "1:00 PM", "name": "Chris Black"},
+            {"time": "3:30 PM", "name": "Diana Blue"}
+          ]
+        };
+
+        const appointments = appointmentsByDate[currentDate] || [];
+        const container = document.getElementById('appointments-container');
+
+        if (appointments.length > 0) {
+          container.innerHTML = '<ul class="nhsuk-list" style="list-style: none; padding: 0;"></ul>';
+          const list = container.querySelector('.nhsuk-list');
+
+          appointments.forEach((appointment, index) => {
+            const item = document.createElement('li');
+            item.innerHTML = `
+              <strong>Time:</strong> ${appointment.time}<br>
+              <strong>Patient:</strong> <span class="patient-name" id="patient-${index + 1}">********</span>
+              <button class="nhsuk-button nhsuk-button--secondary reveal-button" data-patient-id="${index + 1}">Reveal </button>
+              <button class="nhsuk-button nhsuk-button--secondary hide-button" data-patient-id="${index + 1}" style="display:none;">Hide </button>
+            `;
+            list.appendChild(item);
+          });
+
+          attachEventListeners(); // Reattach event listeners to dynamically added buttons
+        } else {
+          container.innerHTML = '<p>No appointments scheduled for this day.</p>';
+        }
+      };
+
+      updatePagination();
+      loadAppointments();
+    });
+  </script>
+{% endblock %}

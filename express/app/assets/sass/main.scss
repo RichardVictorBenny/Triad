@@ -8,4 +8,46 @@
 ///////////////////////////////////////////
 // Add your custom CSS/Sass styles below...
 ///////////////////////////////////////////
+
+.p-2{
+    padding: 20px
+}
+.date-scroller-wrapper {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 1rem;
+  }
+
+  .date-scroller-wrapper ul {
+    display: inline-flex;
+    gap: 0.5rem;
+  }
+
+  .date-item {
+    display: inline-block;
+    margin: 0 0.5rem;
+    flex-shrink: 0;
+    white-space: normal;
+    background-color: darken(white, 15%);
+    padding: 20px
+  }
+
+
+
+  .time-slots-containter {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Responsive grid columns */
+    gap: 10px; /* Add some space between the grid items */
+    margin-top: 15px;
+}
+.slot-item {
+    width: 100%;
+    text-align: center;
+}
+
+  .nhsuk-button--active {
+    background-color: #005eb8;
+    color: white;
+  }
+
   

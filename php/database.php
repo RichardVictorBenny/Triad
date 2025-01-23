@@ -15,8 +15,8 @@ class Database
         $stmt = $this->pdo->prepare($query);
         $criteria = ['value' => $value];
         $stmt->execute($criteria);
-        $jokes = $stmt->fetchAll();
-        return $jokes;
+        $values = $stmt->fetchAll();
+        return $values;
     }
 
     function FindAll()
