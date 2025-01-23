@@ -13,7 +13,7 @@
     <h1 class="nhsuk-heading-xl">Log in to your NHS account</h1>
     <p class="nhsuk-body">Access your NHS services and manage your health securely.</p>
     
-    <form action="/login-request" method="post" class="nhsuk-form-group" id="login-form">
+    <form action="" method="post" class="nhsuk-form-group" id="login-form">
       <!-- Username Field -->
       <div class="nhsuk-form-group">
         <label class="nhsuk-label" for="username">Username or NHS Number</label>
@@ -76,6 +76,48 @@
     <p id="response"></p>
   </div>
 </div>
+<script>
+  const login = document.getElementById("login-form");
+  login.addEventListener('submit', function (event) {
+
+     
+      // Capture form data
+      const formData = new FormData(event.target);
+
+      try {
+          // Send the data to PHP file
+          const username = document.getElementById("username");
+          const password = document.getElementById("password");
+
+
+          if(username && password
+
+          )
+
+          {
+            window.location("/home");
+          }
+          else
+          {
+            var result = "Please enter a username and password";
+          }
+
+
+
+
+
+         
+          // Get the PHP response
+
+          // Display the response in the page
+
+          document.getElementById('response').innerHTML = result;
+      } catch (error) {
+          // console.error('Error:', error);
+          document.getElementById('response').innerHTML = 'An error occurred. Please try again.';
+      }
+  });
+</script>
 
 
 
