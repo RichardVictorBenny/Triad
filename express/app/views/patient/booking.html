@@ -35,10 +35,10 @@ text: "back"
         <!-- Available Slots -->
         <div class="slots-container nhsuk-card p-2">
             <h2 class="nhsuk-heading-m">Available Slots</h2>
-                <div class="time-slots-containter" id="slotsContainer">
+            <div class="time-slots-containter" id="slotsContainer">
 
-                </div>
-                <!-- Slots will be populated dynamically -->
+            </div>
+            <!-- Slots will be populated dynamically -->
         </div>
     </div>
 </div>
@@ -100,15 +100,30 @@ text: "back"
             });
             button.classList.add("nhsuk-button--active");
 
-            // Populate slots dynamically
-            slotsContainer.innerHTML = ""; // Clear previous slots
+            slotsContainer.innerHTML = ""; 
 
             slots.forEach((slot) => {
+                const isAvailable = Math.random() >= 0.5;
                 const slotItem = document.createElement("div");
                 slotItem.classList.add("slot-item");
-                slotItem.innerHTML = `<button class="nhsuk-button">${slot}</button>`;
+
+                const button = document.createElement("button");
+                button.classList.add("nhsuk-button");
+                button.disabled = !isAvailable;
+                button.textContent = slot;
+
+                button.addEventListener("click", () => {
+                    const formattedTime = formatTime(slot); 
+                    window.location.href = `/slot/${formattedTime}`; 
+                });
+
+                slotItem.appendChild(button);
                 slotsContainer.appendChild(slotItem);
             });
+
+            function formatTime(slot) {
+                return slot.replace(/\s+/g, '').toLowerCase();
+            }
         });
     });
 </script>
