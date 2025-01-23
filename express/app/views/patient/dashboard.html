@@ -18,6 +18,14 @@
     <div class="nhsuk-grid-column-full">
       <h1 class="nhsuk-heading-xl">Patient Dashboard</h1>
 
+      <ul class="nhsuk-list" style="list-style: none; padding: 0;">
+          <li>
+            <strong>Name: J</strong> Jenny<br>
+            <strong>Primary GP:</strong> Dr. Olivia Johnson<br>
+            <strong>Primary Clinic:</strong> Blackrock Clinic, Grafton Road, LN3 4TJ <br>
+          </li>
+      </ul>
+
       <!-- Navigation for different days -->
       <nav class="nhsuk-pagination" role="navigation" aria-label="Pagination">
         <ul class="nhsuk-pagination__list" style="list-style: none; padding: 0;">
@@ -106,20 +114,20 @@
       const loadAppointments = () => {
         const appointmentsByDate = {
           "2025-01-15": [
-            {"time": "9:00 AM", "doctor": "Dr. Alice Green", "reason": "Routine Checkup"}
+            {"time": "9:00 AM", "doctor": "Dr. Alice Green", "reason": "Routine Checkup", "clinc": "Kings Clinic, Braket Road, NN3 5PO"}
           ],
           "2025-01-22": [
-            {"time": "10:00 AM", "doctor": "Dr. John Doe", "reason": "Discuss Test Results"}
+            {"time": "10:00 AM", "doctor": "Dr. John Doe", "reason": "Discuss Test Results", "clinc": "Mane Group, Milton Road, MM3 4PJ"}
           ],
           "2025-01-25": [
-            {"time": "11:30 AM", "doctor": "Dr. Jane Smith", "reason": "Vaccination"}
+            {"time": "11:30 AM", "doctor": "Dr. Jane Smith", "reason": "Vaccination", "clinc": "Blackrock Clinic, Grafton Road, LN3 4TJ"}
           ],
           "2025-02-05": [
-            {"time": "2:00 PM", "doctor": "Dr. Emily Brown", "reason": "General Consultation"}
+            {"time": "2:00 PM", "doctor": "Dr. Emily Brown", "reason": "General Consultation", "clinc": "Vanguard medicals, Billy Road, NN12 4UJ"}
           ],
           "2025-02-12": [
-            {"time": "1:00 PM", "doctor": "Dr. Chris Black", "reason": "Prescription Refill"},
-            {"time": "3:30 PM", "doctor": "Dr. Diana Blue", "reason": "Skin Check"}
+            {"time": "1:00 PM", "doctor": "Dr. Chris Black", "reason": "Prescription Refill", "clinc": "Axelrod Pharmacy, Rosewood Road, NN3 4PJ"},
+            {"time": "3:30 PM", "doctor": "Dr. Diana Blue", "reason": "Skin Check", "clinc": "David and Lee Multispeciality, London Road, MK3 4PJ"}
           ]
         };
 
@@ -136,6 +144,7 @@
               <strong>Time:</strong> ${appointment.time}<br>
               <strong>Doctor:</strong> ${appointment.doctor}<br>
               <strong>Reason:</strong> ${appointment.reason}<br>
+              <strong>Location:</strong> ${appointment.clinc}<br>
             `;
             list.appendChild(item);
           });

@@ -2,6 +2,7 @@
 const express = require('express');
 
 const router = express.Router();
+
 router.post('/magical-powers-answer', function(req, res) {
     var magicPowers = req.session.data['magical-powers']
 
@@ -28,9 +29,9 @@ router.post('/login-request', function(req, res) {
 })
 
 router.post('/slots', function(req, res) {
-    res.redirect('/patient/describesymtoms')
-})
+    console.log(req.params.time);
+    res.redirect('/patient/describesymtoms');
+  })
 
-// Add your routes here - above the module.exports line
 
 module.exports = router;
