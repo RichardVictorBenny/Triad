@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GP Agenda</title>
+    <!-- FullCalendar CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
+    <!-- Custom CSS for styling -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #calendar {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>GP Agenda</h1>
+    <div id="calendar"></div>
+
+    <!-- FullCalendar JS -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <!-- Initialize the calendar -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth', // or 'timeGridWeek', 'timeGridDay'
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                events: [
+                    // Example events
+                    {
+                        title: 'Patient Consultation - John Doe',
+                        start: '2025-01-24T10:00:00',
+                        end: '2025-01-24T11:00:00'
+                    },
+                    {
+                        title: 'Follow-up Appointment - Jane Smith',
+                        start: '2025-01-25T14:00:00',
+                        end: '2025-01-25T14:30:00'
+                    }
+                    // Fetch more events from your data source
+                ]
+            });
+
+            calendar.render();
+        });
+    </script>
+</body>
+</html>
