@@ -9,7 +9,6 @@ COPY . .
 
 # Install dependencies (this includes gulp and any other dependencies in package.json)
 RUN npm install
-RUN npm install axios
 
 
 # List the files in the directory to ensure gulpfile.js is present

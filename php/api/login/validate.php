@@ -25,19 +25,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!empty($username) && !empty($password)) {
         try {
-            // // Connect to SQLite database
-            // $db = new PDO('sqlite:database.db'); // Change to your DB connection string
 
-            // // Insert data into the table
-            // $stmt = $db->prepare('INSERT INTO users (username, password) VALUES (:username, :password)');
-            // $stmt->bindParam(':username', $username);
-            // $stmt->bindParam(':password', $password); // Use hashed passwords in production
-            // $stmt->execute();
 
-            $db = new Database($pdo, 'user');
-            $user = $db->Find('username', $username)[0];
+            $db = new Database($pdo, 'users');
+            $user = $db->Find('name', $username)[0];
             if($password == $user['password']){
-                echo json_encode(['success' => true, 'message' => 'User inserted successfully', 'user' => $user]);
+                echo json_encode(['success' => true, 'message' => 'User Valid', 'user' => $user]);
             }
 
             echo json_encode(['success' => true, 'message' => 'User inserted successfully']);
