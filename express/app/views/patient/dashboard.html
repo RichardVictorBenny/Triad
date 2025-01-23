@@ -8,7 +8,7 @@
 
 {% block beforeContent %}
   {{ backLink({
-    "href": "#",
+    "href": "/start-page",
     "text": "Back"
   }) }}
 {% endblock %}
@@ -42,7 +42,7 @@
       <h2 class="nhsuk-heading-l" id="appointments-title">Your Appointments for Today</h2>
 
       {% set appointmentsByDate = {
-        "2025-01-15": [
+        "2025-01-23": [
           {"time": "9:00 AM", "doctor": "Dr. Alice Green", "reason": "Routine Checkup"}
         ],
         "2025-01-22": [
@@ -78,7 +78,7 @@
         {% endif %}
       </div>
 
-      <button class="nhsuk-button nhsuk-button--secondary" id="book-appointment">Book a New Appointment</button>
+      <button class="nhsuk-button nhsuk-button" id="book-appointment">Book a New Appointment</button>
     </div>
   </div>
 
@@ -111,7 +111,7 @@
           "2025-01-22": [
             {"time": "10:00 AM", "doctor": "Dr. John Doe", "reason": "Discuss Test Results"}
           ],
-          "2025-01-29": [
+          "2025-01-25": [
             {"time": "11:30 AM", "doctor": "Dr. Jane Smith", "reason": "Vaccination"}
           ],
           "2025-02-05": [
@@ -145,8 +145,8 @@
       };
 
       const bookAppointment = () => {
-        alert('Redirecting to book a new appointment page...');
-        window.location.href = '/book-appointment';
+        // alert('Redirecting to book a new appointment page...');
+        window.location.href = '/patient/book-appointment';
       };
 
       document.getElementById('book-appointment').addEventListener('click', bookAppointment);

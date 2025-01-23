@@ -6,7 +6,7 @@ Select a Date and Slot
 
 {% block beforeContent %}
 {{ breadcrumb({
-href: "/login",
+href: "/patient/dashboard",
 text: "back"
 }) }}
 {% endblock %}
@@ -114,7 +114,7 @@ text: "back"
 
                 button.addEventListener("click", () => {
                     const formattedTime = formatTime(slot); 
-                    window.location.href = `/slot/${formattedTime}`; 
+                    window.location.href = `/patient/describesymtoms`; 
                 });
 
                 slotItem.appendChild(button);

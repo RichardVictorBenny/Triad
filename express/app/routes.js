@@ -17,7 +17,7 @@ router.post('/login-request', function(req, res) {
     password = req.session.data['password'];
 
     if(username === 'Jenny' && password === 'jenny'){
-        res.redirect('/patient/booking');
+        res.redirect('/patient/dashboard');
     }
     if(username === 'Daria' && password === 'daria'){
         res.redirect('/doctor/dashboard');
@@ -27,7 +27,9 @@ router.post('/login-request', function(req, res) {
     }
 })
 
-
+router.post('/slots', function(req, res) {
+    res.redirect('/patient/describesymtoms')
+})
 
 // Add your routes here - above the module.exports line
 
