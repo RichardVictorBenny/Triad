@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+
+{% set mainClasses = "nhsuk-main-wrapper--s" %}
+
+{% block pageTitle %}
+  Question page
+{% endblock %}
+
+{% block beforeContent %}
+  {{ backLink({
+    "href": "#",
+    "text": "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="nhsuk-form-group">
+
+    <fieldset class="nhsuk-fieldset">
+      <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
+        <h1 class="nhsuk-fieldset__heading">
+          What would you like your mental health provider to contact you?
+        </h1>
+      </legend>
+  
+      <div class="nhsuk-radios">
+  
+        <div class="nhsuk-radios__item">
+          <input class="nhsuk-radios__input" id="contact-meeting" name="contact-meeting" type="radio" value="yes">
+          <label class="nhsuk-label nhsuk-radios__label" for="example-1">
+            With a meeting
+          </label>
+        </div>
+  
+        <div class="nhsuk-radios__item">
+          <input class="nhsuk-radios__input" id="contact-phone" name="contact-phone" type="radio" value="no">
+          <label class="nhsuk-label nhsuk-radios__label" for="example-2">
+            By Phone
+          </label>
+        </div>
+  
+        <div class="nhsuk-radios__item">
+          <input class="nhsuk-radios__input" id="contact-video" name="contact-video" type="radio" value="no">
+          <label class="nhsuk-label nhsuk-radios__label" for="example-2">
+            By video call
+          </label>
+        </div>
+  
+      </div>
+    </fieldset>
+  
+  </div>
+
+  {{ button({
+    "text": "Continue",
+    "id": "btn_submit"
+  }) }}
+
+{% endblock %}

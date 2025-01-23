@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+{% set mainClasses = "nhsuk-main-wrapper--s" %}
+
+{% block pageTitle %}
+  Question page
+{% endblock %}
+
+{% block beforeContent %}
+  {{ backLink({
+    "href": "#",
+    "text": "Back"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="nhsuk-grid-row">
+    <div class="nhsuk-grid-column-two-thirds">
+
+      <h1>Tell us how you feel</h1>
+      <div class="nhsuk-form-group">
+        <label class="nhsuk-label" for="example">
+            Please tell us about your struggles and how they affect you
+        </label>
+        <div class="nhsuk-hint" id="example-hint">
+        </div>
+        <textarea class="nhsuk-textarea" id="mh-describesymptoms" name="mh-describesymptoms" rows="5" aria-describedby="example-hint"></textarea>
+      </div>
+
+    </div>
+  </div>
+
+  {{ button({
+    "text": "Continue",
+    "id": "btn_submit"
+  }) }}
+
+{% endblock %}
