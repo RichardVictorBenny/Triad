@@ -6,7 +6,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 // $path = trim($_SERVER['PATH_INFO'], '/');
 
 
-if ($request === '/api/user/' && $method === 'GET') {
+if ($request === '/api/' && $method === 'GET') {
     echo json_encode(["message" => "GET request to /user"]);
 } elseif ($request === '/user' && $method === 'POST') {
     echo json_encode(["message" => "POST request to /user"]);
